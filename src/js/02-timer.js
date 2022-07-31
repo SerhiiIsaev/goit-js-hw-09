@@ -1,5 +1,7 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
+import "notiflix/dist/notiflix-3.2.5.min.css";
 
 const inputEl = document.querySelector('#datetime-picker');
 const startBtnEl = document.querySelector('[data-start]');
@@ -10,10 +12,8 @@ const timerSeconds = document.querySelector('[data-seconds]');
 
 
 
-let terminalDates = 0
-startBtnEl.disabled = true
-
-
+let terminalDates = 0;
+startBtnEl.disabled = true;
 
 const options = {
   enableTime: true,
@@ -24,36 +24,36 @@ const options = {
       terminalDates = selectedDates[0].getTime();
 
       if (terminalDates <= new Date()) {
-        window.alert("Please choose a date in the future")
+        Notiflix.Report.info('The date is not valid', 'Please choose a date in the future', 'Ok');
+        // window.alert("Please choose a date in the future")
       } else {
-          startBtnEl.disabled = false
+        startBtnEl.disabled = false;
     }
-      console.log(terminalDates)
   },
 };
 
 flatpickr(inputEl, options);
 
-startBtnEl.addEventListener('click', onTimerStart )
+startBtnEl.addEventListener('click', onTimerStart);
 
 
 function onTimerStart(e) {
-   
     const intervalId = setInterval(() => {
-      
     const deltaTime = (terminalDates - new Date().getTime())
     const { days, hours, minutes, seconds } = convertMs(deltaTime);
-    timerDays.textContent = days;
-    timerHours.textContent = hours;
-    timerMinutes.textContent = minutes;
-    timerSeconds.textContent = seconds;
-    console.log(terminalDates, new Date().getTime());
+    timerDays.textContent = addLeadingZero(days);
+    timerHours.textContent = addLeadingZero(hours);
+    timerMinutes.textContent = addLeadingZero(minutes);
+    timerSeconds.textContent = addLeadingZero(seconds);
+    if ( deltaTime < 1000 ) {
+      clearInterval(intervalId);
+      }; 
     }, 1000)
-    if ( terminalDates <= new Date().getTime()) {
-        clearInterval(intervalId)
-    } 
+};
 
-}
+function addLeadingZero(value) {
+  return value.toString().padStart(2, "0");
+};
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
