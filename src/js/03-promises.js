@@ -9,10 +9,9 @@ const formElements = {}
 function onBtnCreatePromises(evt) {
   evt.preventDefault();
   const formElements = evt.currentTarget.elements;
-  console.log(Number(formElements.delay.value));
   let timer = Number(formElements.delay.value);
   for (let i = 0; i < Number(formElements.amount.value); i += 1 ){
-    delayMessage(i, timer)
+    delayMessage(i, timer);
     timer += Number(formElements.step.value);
   }
   formEl.reset()
