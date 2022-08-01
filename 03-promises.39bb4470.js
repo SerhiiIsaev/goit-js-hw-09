@@ -1,0 +1,2 @@
+const e=document.querySelector("form"),o=document.querySelector("button");function t(e,o){Math.random()>.3?console.log(`✅ Fulfilled promise ${e} in ${o}ms`):console.log(`❌ Rejected promise ${e} in ${o}ms`)}e.addEventListener("submit",(function(o){o.preventDefault();const n=o.currentTarget.elements;for(let e=0;e<Number(n.amount.value);e+=1)t(e+1,Number(n.step.value));console.log(Number(n.amount.value)),e.reset()})),console.log(o);
+//# sourceMappingURL=03-promises.39bb4470.js.map
