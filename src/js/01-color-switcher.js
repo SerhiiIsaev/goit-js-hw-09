@@ -6,6 +6,8 @@ startBtnEl.addEventListener('click', onBodyStartColorChange);
 stopBtnEl.addEventListener('click', onBodyStopColorChange);
 
 startBtnEl.disabled = false
+let timerID = 0
+
 
 function onBodyStartColorChange(evt) {
     timerID = setInterval(addBodyColor, 1000);
