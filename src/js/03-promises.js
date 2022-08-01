@@ -27,9 +27,7 @@ function delayMessage(i, timer) {
     } else {
       setTimeout(() => { reject({i, timer})}, timer);
     }
-    
-
-}).then(({ i, timer }) => {
+  }).then(({ i, timer }) => {
     console.log(`✅ Fulfilled promise ${i} in ${timer}ms`);
   })
   .catch(({ i, timer }) => {
