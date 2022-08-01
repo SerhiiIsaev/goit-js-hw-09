@@ -2,15 +2,17 @@ const startBtnEl = document.querySelector('[data-start]');
 const stopBtnEl = document.querySelector('[data-stop]');
 const bodyEl = document.querySelector('body');
 
-startBtnEl.addEventListener('click', OnBodyStartColorChange);
-stopBtnEl.addEventListener('click', OnBodyStopColorChange);
+startBtnEl.addEventListener('click', onBodyStartColorChange);
+stopBtnEl.addEventListener('click', onBodyStopColorChange);
 
-function OnBodyStartColorChange(evt) {
+startBtnEl.disabled = false
+
+function onBodyStartColorChange(evt) {
     timerID = setInterval(addBodyColor, 1000);
-    startBtnEl.disabled = true;
+    startBtnEl.disabled = true;  
 };
 
-function OnBodyStopColorChange(evt) {
+function onBodyStopColorChange(evt) {
     clearInterval(timerID);
     startBtnEl.disabled = false;
 };

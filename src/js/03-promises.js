@@ -1,7 +1,7 @@
 const formEl = document.querySelector("form");
 const createPromisesBtn = document.querySelector("button");
 
-createPromisesBtn.addEventListener('submit', onBtnCreatePromises)
+formEl.addEventListener('submit', onBtnCreatePromises)
 console.log(createPromisesBtn);
 const formElements = {}
 
@@ -9,7 +9,10 @@ const formElements = {}
 function onBtnCreatePromises(evt) {
   evt.preventDefault();
   const formElements = evt.currentTarget.elements
-  console.log(evt.currentTarget.elements);
+  for (let i = 0; i < Number(formElements.amount.value); i += 1 ){
+    createPromise(i+1, Number(formElements.step.value))
+  }
+  console.log(Number(formElements.amount.value));
   formEl.reset()
 }
 
@@ -22,10 +25,21 @@ function onBtnCreatePromises(evt) {
 //   }
 // }
 
-// createPromise(2, 1500)
-//   .then(({ position, delay }) => {
+function createPromise(position, delay){
+  const shouldResolve = Math.random() > 0.3;
+  if (shouldResolve) {
+    console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+  } else {
+    console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+  }
+}
+
+// function createPromise(position, delay){
+//   const shouldResolve = Math.random() > 0.3;
+//   if (shouldResolve) {
 //     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-//   })
-//   .catch(({ position, delay }) => {
+//   } else {
 //     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-//   });
+//   }
+// }
+
