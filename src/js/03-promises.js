@@ -1,3 +1,5 @@
+import Notiflix from 'notiflix';
+import "notiflix/dist/notiflix-3.2.5.min.css";
 
 const formEl = document.querySelector("form");
 const createPromisesBtn = document.querySelector("button");
@@ -11,7 +13,7 @@ function onBtnCreatePromises(evt) {
   const formElements = evt.currentTarget.elements;
   let timer = Number(formElements.delay.value);
   for (let i = 0; i < Number(formElements.amount.value); i += 1 ){
-    delayMessage(i, timer);
+    delayMessage(i+1, timer);
     timer += Number(formElements.step.value);
   }
   formEl.reset()
@@ -27,10 +29,10 @@ function delayMessage(i, timer) {
       setTimeout(() => { reject({i, timer})}, timer);
     }
   }).then(({ i, timer }) => {
-    console.log(`✅ Fulfilled promise ${i} in ${timer}ms`);
+    Notiflix.Notify.success(`✅ Fulfilled promise ${i} in ${timer}ms`);
   })
   .catch(({ i, timer }) => {
-    console.log(`❌ Rejected promise ${i} in ${timer}ms`);
+    Notiflix.Notify.failure(`❌ Rejected promise ${i} in ${timer}ms`);
   });
  
 }
